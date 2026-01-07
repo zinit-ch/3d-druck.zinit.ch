@@ -19,3 +19,8 @@ npm run deploy
 Notes:
 - The Vite `base` is set to a relative path so the site works when served from GitHub Pages.
 - If you prefer a repository-root path (e.g. `/your-repo/`), update `base` in `vite.config.ts` accordingly.
+- To preview changes before publishing to gh-pages run: 
+
+```bash
+npm run preview
+```
