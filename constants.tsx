@@ -11,35 +11,67 @@ export const MATERIALS: Record<MaterialType, MaterialInfo> = {
     density: 1.24,
     costPerKg: 25.0,
     description: 'Easy to print, biodegradable, great for prototypes.',
-    enabled: true
+    enabled: true,
+    colors: [
+      { name: 'Black', hex: '#000000' },
+      { name: 'White', hex: '#FFFFFF' },
+      { name: 'Grey', hex: '#808080' },
+      { name: 'Red', hex: '#EF4444' },
+      { name: 'Blue', hex: '#3B82F6' }
+    ]
   },
   [MaterialType.PETG]: {
     name: MaterialType.PETG,
     density: 1.27,
     costPerKg: 30.0,
     description: 'Durable, chemical resistant, good balance of strength.',
-    enabled: true
+    enabled: true,
+    colors: [
+      { name: 'White', hex: '#FFFFFF' },
+      { name: 'Black', hex: '#000000' },
+      { name: 'Clear', hex: '#EAF6FF' },
+      { name: 'Cyan', hex: '#06B6D4' },
+      { name: 'Green', hex: '#10B981' }
+    ]
   },
   [MaterialType.ABS]: {
     name: MaterialType.ABS,
     density: 1.04,
     costPerKg: 28.0,
     description: 'High strength, heat resistant, industrial standard.',
-    enabled: true
+    enabled: true,
+    colors: [
+      { name: 'Black', hex: '#000000' },
+      { name: 'Grey', hex: '#6B7280' },
+      { name: 'Red', hex: '#DC2626' },
+      { name: 'Orange', hex: '#F59E0B' },
+      { name: 'Blue', hex: '#2563EB' }
+    ]
   },
   [MaterialType.TPU]: {
     name: MaterialType.TPU,
     density: 1.21,
     costPerKg: 45.0,
     description: 'Flexible, rubber-like, high impact resistance.',
-    enabled: true
+    enabled: true,
+    colors: [
+      { name: 'Black', hex: '#000000' },
+      { name: 'White', hex: '#FFFFFF' },
+      { name: 'Pink', hex: '#F472B6' },
+      { name: 'Neon Green', hex: '#84CC16' }
+    ]
   },
   [MaterialType.NYLON]: {
     name: MaterialType.NYLON,
     density: 1.1,
     costPerKg: 60.0,
     description: 'Extremely tough, wear resistant, self-lubricating.',
-    enabled: false // disabled by default as an example
+    enabled: false, // disabled by default as an example
+    colors: [
+      { name: 'Natural', hex: '#F5F5F4' },
+      { name: 'Black', hex: '#000000' },
+      { name: 'Grey', hex: '#9CA3AF' }
+    ]
   }
 };
 
@@ -52,16 +84,7 @@ export const PRINTER_PROFILES: Record<string, { hourlyRate: number; speedFactor:
 // Choose which profile should be used by default. Change to 'Default' or 'BambuLab H2C'.
 export const DEFAULT_PRINTER = 'BambuLab H2C';
 
-export const COLORS = [
-  { name: 'White', hex: '#FFFFFF' },
-  { name: 'Black', hex: '#000000' },
-  { name: 'Grey', hex: '#808080' },
-  { name: 'Red', hex: '#EF4444' },
-  { name: 'Blue', hex: '#3B82F6' },
-  { name: 'Green', hex: '#10B981' },
-  { name: 'Orange', hex: '#F59E0B' },
-  { name: 'Purple', hex: '#8B5CF6' }
-];
+// colors are now embedded on each material in the MATERIALS map
 
 export const NOZZLE_FACTORS: Record<number, number> = {
   0.2: 2.0, // High detail, slow

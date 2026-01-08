@@ -24,6 +24,7 @@ export interface MaterialInfo {
   costPerKg: number; // USD
   description: string;
   enabled?: boolean; // allow toggling materials on/off from constants
+  colors?: { name: string; hex: string }[];
 }
 
 export interface PrintConfig {

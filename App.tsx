@@ -1,7 +1,7 @@
 
 import React, { useState, useMemo, useEffect } from 'react';
 import { MaterialType, ModelStats, PrintConfig, PriceBreakdown } from './types';
-import { MATERIALS, COLORS, NOZZLE_FACTORS, BASE_SETUP_FEE, LABOR_RATE, ENABLE_MULTICOLOR, PRINTER_PROFILES, DEFAULT_PRINTER } from './constants';
+import { MATERIALS, NOZZLE_FACTORS, BASE_SETUP_FEE, LABOR_RATE, ENABLE_MULTICOLOR, PRINTER_PROFILES, DEFAULT_PRINTER } from './constants';
 import { calculateModelStats, formatNumber, roundToNearest005 } from './utils/stlUtils';
 import Viewer3D from './components/Viewer3D';
 import { Upload, Settings, DollarSign, Box, AlertCircle, Palette, Layers, Clock, Send } from 'lucide-react';
@@ -21,7 +21,7 @@ const App: React.FC = () => {
     infill: 20,
     layerHeight: 0.2,
     quantity: 1,
-    color: COLORS[1].hex, // Default Black
+    color: (MATERIALS[MaterialType.PLA].colors?.find(c => c.name === 'Black')?.hex || MATERIALS[MaterialType.PLA].colors?.[0].hex || '#000000'), // Default Black if available
     isMulticolor: false,
     nozzleSize: 0.4,
     colorsCount: 2
@@ -35,6 +35,15 @@ const App: React.FC = () => {
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
+
+  // Ensure selected color is valid for the chosen material. If not, pick a sensible default.
+  useEffect(() => {
+    const available = MATERIALS[config.material].colors || [];
+    if (!available.length) return;
+    if (!available.some(c => c.hex === config.color)) {
+      setConfig(prev => ({ ...prev, color: (available.find(c => c.name === 'Black')?.hex || available[0].hex) }));
+    }
+  }, [config.material]);
 
   const showMulticolor = ENABLE_MULTICOLOR && config.isMulticolor;
 
@@ -95,7 +104,7 @@ const App: React.FC = () => {
     const email = '3d-druck@zinit.ch';
     const subject = encodeURIComponent(`${t.emailSubject}: ${file.name}`);
     
-    const colorName = config.isMulticolor ? `${config.colorsCount} colors` : (COLORS.find(c => c.hex === config.color)?.name || config.color);
+    const colorName = config.isMulticolor ? `${config.colorsCount} colors` : (MATERIALS[config.material].colors?.find(c => c.hex === config.color)?.name || config.color);
     
     const body = encodeURIComponent(
       `${t.emailBodyHeader}\n\n` +
@@ -292,7 +301,7 @@ const App: React.FC = () => {
                 </label>
                 {!showMulticolor ? (
                   <div className="flex flex-wrap gap-2">
-                    {COLORS.map((c) => (
+                    {(MATERIALS[config.material].colors || []).map((c) => (
                       <button
                         key={c.hex}
                         onClick={() => setConfig({ ...config, color: c.hex })}
