@@ -22,7 +22,7 @@ export interface MaterialInfo {
   name: MaterialType;
   density: number; // g/cm^3
   costPerKg: number; // USD
-  description: string;
+  description?: string;
   enabled?: boolean; // allow toggling materials on/off from constants
   colors?: { name: string; hex: string }[];
 }

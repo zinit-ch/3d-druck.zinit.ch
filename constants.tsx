@@ -10,7 +10,6 @@ export const MATERIALS: Record<MaterialType, MaterialInfo> = {
     name: MaterialType.PLA,
     density: 1.24,
     costPerKg: 25.0,
-    description: 'Easy to print, biodegradable, great for prototypes.',
     enabled: true,
     colors: [
       { name: 'Black', hex: '#000000' },
@@ -24,7 +23,6 @@ export const MATERIALS: Record<MaterialType, MaterialInfo> = {
     name: MaterialType.PETG,
     density: 1.27,
     costPerKg: 30.0,
-    description: 'Durable, chemical resistant, good balance of strength.',
     enabled: true,
     colors: [
       { name: 'White', hex: '#FFFFFF' },
@@ -38,7 +36,6 @@ export const MATERIALS: Record<MaterialType, MaterialInfo> = {
     name: MaterialType.ABS,
     density: 1.04,
     costPerKg: 28.0,
-    description: 'High strength, heat resistant, industrial standard.',
     enabled: true,
     colors: [
       { name: 'Black', hex: '#000000' },
@@ -52,7 +49,6 @@ export const MATERIALS: Record<MaterialType, MaterialInfo> = {
     name: MaterialType.TPU,
     density: 1.21,
     costPerKg: 45.0,
-    description: 'Flexible, rubber-like, high impact resistance.',
     enabled: true,
     colors: [
       { name: 'Black', hex: '#000000' },
@@ -65,7 +61,6 @@ export const MATERIALS: Record<MaterialType, MaterialInfo> = {
     name: MaterialType.NYLON,
     density: 1.1,
     costPerKg: 60.0,
-    description: 'Extremely tough, wear resistant, self-lubricating.',
     enabled: false, // disabled by default as an example
     colors: [
       { name: 'Natural', hex: '#F5F5F4' },
