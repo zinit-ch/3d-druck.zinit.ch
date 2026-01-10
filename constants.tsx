@@ -66,10 +66,10 @@ export const MATERIALS: Record<MaterialType, MaterialInfo> = {
 };
 
 // Printer profiles: adjust these to optimize pricing/time calculations per printer
-export const PRINTER_PROFILES: Record<string, { hourlyRate: number; speedFactor: number; multicolorFactor: number }> = {
-  Default: { hourlyRate: 2.0, speedFactor: 1.0, multicolorFactor: 1.5 },
-  'BambuLab H2C': { hourlyRate: 5.0, speedFactor: 1.0, multicolorFactor: 2.0 },
-  'Ender 3 V2': { hourlyRate: 2.0, speedFactor: 3.8, multicolorFactor: 0.0 }
+export const PRINTER_PROFILES: Record<string, { hourlyRate: number; speedFactor: number; multicolorFactor: number; printVolume: { x: number; y: number; z: number } }> = {
+  Default: { hourlyRate: 2.0, speedFactor: 1.0, multicolorFactor: 1.5, printVolume: { x: 200, y: 200, z: 200 } },
+  'BambuLab H2C': { hourlyRate: 5.0, speedFactor: 1.0, multicolorFactor: 2.0, printVolume: { x: 256, y: 256, z: 256 } },
+  'Ender 3 V2': { hourlyRate: 2.0, speedFactor: 3.8, multicolorFactor: 0.0, printVolume: { x: 210, y: 220, z: 250 } }
 };
 
 // Choose which profile should be used by default. Change to 'Default' or 'BambuLab H2C'.

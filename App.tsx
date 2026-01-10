@@ -12,6 +12,7 @@ const App: React.FC = () => {
   const [stats, setStats] = useState<ModelStats | null>(null);
   const [isProcessing, setIsProcessing] = useState(false);
   const [lang, setLang] = useState<Language>('de');
+  const [printerError, setPrinterError] = useState<string | null>(null);
 
   const t = TRANSLATIONS[lang];
   const matDesc = MATERIAL_DESCRIPTIONS[lang];
@@ -62,6 +63,22 @@ const App: React.FC = () => {
       }
     }
   };
+
+  // Watch stats and language; show localized error when model exceeds printer volume
+  useEffect(() => {
+    const profile = PRINTER_PROFILES[DEFAULT_PRINTER] || PRINTER_PROFILES.Default;
+    if (!stats) {
+      setPrinterError(null);
+      return;
+    }
+
+    const bb = stats.boundingBox;
+    if (bb.x > profile.printVolume.x || bb.y > profile.printVolume.y || bb.z > profile.printVolume.z) {
+      setPrinterError(t.printerTooLarge);
+    } else {
+      setPrinterError(null);
+    }
+  }, [stats, lang]);
 
   const breakdown = useMemo((): PriceBreakdown => {
     if (!stats) return { materialCost: 0, laborCost: 0, machineCost: 0, printTime: 0, total: 0 };
@@ -186,6 +203,14 @@ const App: React.FC = () => {
           </label>
         </div>
       </header>
+
+      {printerError && (
+        <div className="max-w-7xl mx-auto mb-6">
+          <div className="rounded-xl bg-red-700/90 text-white p-4 font-semibold shadow-lg">
+            {printerError}
+          </div>
+        </div>
+      )}
 
       <main className="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-12 gap-8">
         
