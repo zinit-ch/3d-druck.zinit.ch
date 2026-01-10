@@ -153,7 +153,7 @@ const App: React.FC = () => {
     <div className="min-h-screen bg-[#0a0a0a] text-neutral-100 p-4 md:p-8 selection:bg-indigo-500/30">
       <header className="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-start md:items-center mb-8 gap-4">
         <div>
-          <h1 className="text-3xl md:text-4xl font-bold bg-gradient-to-r from-indigo-400 to-cyan-400 bg-clip-text text-transparent">
+          <h1 className="text-3xl md:text-4xl font-bold bg-gradient-to-r from-indigo-800 to-indigo-600 bg-clip-text text-transparent">
             {t.title}
           </h1>
         </div>
